@@ -47,7 +47,10 @@ The methods take 2 parameters
 1. payload - This can be an object or string. It needs to be able to uniquely identify the user.
 2. expirationTime - An optional parameter; by default, access is set to 15 minutes, and refresh is set to 1 day. You can adjust it to suit your needs (e.g., '20m', '1h', '60s').
 
-Use the setRefreshCookie method to set the generated refreshToken into a cookie. The 'config' parameter is optional and provides default settings if you don't want to deal with the hassle.
+Use the setRefreshCookie method to set the generated refreshToken into a cookie. The method has 2 parameters
+
+1. res - pass the express 'res' into the method
+2. config - an optional parameter that provides default settings to your cookie if you don't want to deal with all the hassle.
 
 ```javascript
 app.post('/login', (req, res) => {
@@ -64,5 +67,34 @@ app.post('/login', (req, res) => {
   };
 
   auth.setRefreshCookie({ res, config: cookieConfig });
+
+  // have client handle assigning the token to the header
+  res.json({ token: auth.accessToken });
+});
+```
+
+## Protecting a route
+
+```javascript
+// Protect routes with JWT authentication
+app.get('/protected', auth.validateAccessToken(), (req, res) => {
+  res.send('This is a protected route');
+});
+```
+
+## Generating a new token
+
+When an access token is no longer good you'll need to get a new one from the refresh token. If your refresh token is expired or isn't there then you'll be logged out.
+
+```javascript
+app.post('/refresh', (req, res) => {
+  const { status, message } = auth.checkRefreshCookie({ req });
+
+  if (status === 'error') res.status(401).json({ message });
+
+  auth.generateAccessToken({ payload: message });
+
+  // have client handle assigning the token to the header
+  res.send(auth.accessToken);
 });
 ```
