@@ -36,32 +36,33 @@ import { JwtAuth } from 'jwt-auth';
 
 const app = express();
 const auth = new JwtAuth({ publicKey: PUBLIC_KEY, privateKey: PRIVATE_KEY });
+```
 
-// Protect routes with JWT authentication
-app.get('/protected', auth.verifyToken(), (req, res) => {
-  res.send('This is a protected route');
-});
+## Making your tokens
 
-// Sample login route
+Use the generateAccessToken and generateRefreshToken methods to generate your tokens.
+These tokens will be handled by the package so you don't have to worry about state management.
+The methods take 2 parameters
+
+1. payload - This can be an object or string. It needs to be able to uniquely identify the user.
+2. expirationTime - An optional parameter; by default, access is set to 15 minutes, and refresh is set to 1 day. You can adjust it to suit your needs (e.g., '20m', '1h', '60s').
+
+Use the setRefreshCookie method to set the generated refreshToken into a cookie. The 'config' parameter is optional and provides default settings if you don't want to deal with the hassle.
+
+```javascript
 app.post('/login', (req, res) => {
   const user = { id: 1, name: 'Test User' }; // Example user
-  const accessToken = auth.generateAccessToken(user);
-  const refreshToken = auth.generateRefreshToken(user);
+  auth.generateAccessToken({ payload: user });
+  auth.generateRefreshToken({ payload: user });
 
-  // Set tokens in cookies
-  res.cookie('access_token', accessToken, { httpOnly: true });
-  res.cookie('refresh_token', refreshToken, { httpOnly: true });
-  res.json({ message: 'Logged in successfully' });
-});
+  // Default settings if no values are passed
+  const cookieConfig = {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'strict',
+    maxAge: 1000 * 60 * 60 * 24, // 1 day in ms
+  };
 
-// Logout route
-app.post('/logout', (req, res) => {
-  res.clearCookie('access_token');
-  res.clearCookie('refresh_token');
-  res.json({ message: 'Logged out successfully' });
-});
-
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+  auth.setRefreshCookie({ res, config: cookieConfig });
 });
 ```
