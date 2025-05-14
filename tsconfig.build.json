@@ -1,10 +1,16 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
+    "outDir": "./dist",
     "declaration": true,
-    "emitDeclarationOnly": true,
-    "outDir": "dist",
-    "noEmit": false
+    "declarationMap": true,
+    "allowJs": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true
   },
-  "include": ["src/**/*", "types.d.ts"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }
