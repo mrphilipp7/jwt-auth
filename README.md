@@ -9,10 +9,21 @@ This package provides the user with alot of control on how they want to handle t
 npm install jwt-auth
 ```
 
-## Usage
+## Getting started
+
+To start, import the package into your app.
 
 ```javascript
 import { JwtAuth } from 'jwt-auth';
+```
 
-const auth = new JwtAuth();
+You are going to need to generate a rs256 key pair. You can use https://cryptotools.net/rsagen for quick help.
+Then you are going to want to save those to a save location. An .env file can be a popular choice and you can use the https://www.npmjs.com/package/dotenv package to do that.
+
+## Use case
+
+A new instance requires both keys you generated.
+
+```javascript
+const auth = new JwtAuth({ publicKey: PUBLIC_KEY, privateKey: PRIVATE_KEY });
 ```
