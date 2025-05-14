@@ -1,11 +1,10 @@
-# `jwt-auth` - Simple JWT Authentication for Express
+# jwt-auth - a simple JWT Authentication for Express
 
-A lightweight JWT authentication library for Express.js, providing an easy-to-use class for handling JWT-based authentication.
+A lightweight JWT authentication library for Express.js, providing an easy-to-use out of the box experience for JWT-based authentication.
+This package provides the user with alot of control on how they want to handle there JWT authentication. If you don't want to deal with all the hassle, just a few lines of code can get you up and running.
 
 ## Installation
 
 ```bash
 npm install jwt-auth
 ```
-
-This project was created using `bun init` in bun v1.2.13. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
