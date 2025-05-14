@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    // Use modern JS features and module system
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext"],
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+
+    // For Bun or bundlers like tsup, esbuild, etc.
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+
+    // Type safety and best practices
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true
+  },
+  "include": ["src/**/*", "types.d.ts"]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "jwt-auth",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "build": "bun build src/index.ts --outdir dist"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.9"
+  },
+  "peerDependencies": {
+    "express": "^4.18.0",
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.9"
+  }
+}
