@@ -1,0 +1,6 @@
+# Ignore the following files and directories when publishing the package
+*.log
+node_modules/
+tests/
+src/
+*.md
