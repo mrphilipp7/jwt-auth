@@ -1,6 +1,6 @@
 {
   "name": "@mrphilipp7/jwt-auth",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "main": "./dist/index.js",
   "devDependencies": {
     "@types/express": "^5.0.1",
@@ -23,5 +23,10 @@
   ],
   "dependencies": {
     "jsonwebtoken": "^9.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrphilipp7/jwt-auth.git"
+  },
+  "homepage": "https://github.com/mrphilipp7/jwt-auth#readme"
 }
